@@ -16,7 +16,14 @@ namespace WordleSolver
 
         static void Main(string[] args)
         {
-            Console.WriteLine("Wordle Solver");
+            Console.WriteLine("Wordle Solver\n");
+            
+            Console.WriteLine("Instructions for Use");
+            Console.WriteLine(" 1. Open Wordle.");
+            Console.WriteLine(" 2. Input generated guess into Wordle.");
+            Console.WriteLine(" 3. Input results like so\n   for each green tile, enter \"g\"\n  for each yellow tile, enter \"y\"\n  for each grey tile, enter \"n\".");
+            Console.WriteLine(" 4. Repeat steps 2-3 until you win or run out of attempts.");
+
 
             for (int i = 0; i < 6; i++)
             {
@@ -25,7 +32,7 @@ namespace WordleSolver
                 Console.WriteLine();
                 Console.WriteLine($"Guess: {word.ToUpperInvariant()}");
                 
-                Console.Write("Input results of guess in gyn: ");
+                Console.Write("Input results of guess: ");
                 string gyn = Console.ReadLine();
                 for (int j = 0; j < 5; j++)
                 {
