@@ -21,7 +21,7 @@ namespace WordleSolver
             Console.WriteLine("Instructions for Use");
             Console.WriteLine(" 1. Open Wordle.");
             Console.WriteLine(" 2. Input generated guess into Wordle.");
-            Console.WriteLine(" 3. Input results like so\n   for each green tile, enter \"g\"\n  for each yellow tile, enter \"y\"\n  for each grey tile, enter \"n\".");
+            Console.WriteLine(" 3. Input results like so\n   - for each green tile, enter \"g\"\n   - for each yellow tile, enter \"y\"\n   - for each grey tile, enter \"n\".");
             Console.WriteLine(" 4. Repeat steps 2-3 until you win or run out of attempts.");
 
 
@@ -31,9 +31,33 @@ namespace WordleSolver
                 string word = GuessWord();
                 Console.WriteLine();
                 Console.WriteLine($"Guess: {word.ToUpperInvariant()}");
-                
-                Console.Write("Input results of guess: ");
-                string gyn = Console.ReadLine();
+
+                string[] gynlist = new string[1];
+                string gyn;
+                bool repeat = true;
+                while (repeat)
+                {
+                    Console.Write("Input results of guess: ");
+                    gynlist[0] = Console.ReadLine();
+                    repeat = false;
+                    if (gynlist[0].Length != 5)
+                    {
+                        Console.WriteLine("Wrong length of results. Please try again.");
+                        repeat = true;
+                    }
+
+                    foreach (char gin in gynlist[0])
+                    {
+                        if (gin != 'g' && gin != 'y' && gin != 'n')
+                        {
+                            Console.WriteLine("That seems like a misplaced letter there. Try again.");
+                            repeat = true;
+                            break;
+                        }
+                    }
+                }
+
+                gyn = gynlist[0];
                 for (int j = 0; j < 5; j++)
                 {
                     int letterindex = Array.IndexOf(Alphabet, word[j].ToString().ToLowerInvariant()[0]);
@@ -56,11 +80,6 @@ namespace WordleSolver
                     else if (gyn[j] == 'n')
                     {
                         WordAccuracy[letterindex] = Correctness.NotInWord;
-                    }
-
-                    else
-                    {
-                        throw new Exception("burn in hell");
                     }
                 }
             }
